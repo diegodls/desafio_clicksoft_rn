@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import List from '../pages/List';
 import User from '../pages/User';
 import AddComment from '../pages/AddComment';
+import CompletePost from '../pages/CompletePost';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,13 @@ export default function Routes() {
           component={AddComment}
           options={{
             title: 'Adicionar Comentário',
+          }}
+        />
+        <Stack.Screen
+          name="CompletePost"
+          component={CompletePost}
+          options={{
+            title: 'Post Completo',
           }}
         />
       </Stack.Navigator>

@@ -1,16 +1,15 @@
 import React from 'react';
-
 import Routes from './src/routes/routes';
-
 import {StatusBar} from './src/components/StatusBar';
-
-import colors from './src/styles/colors';
+import {PostsProvider} from './src/contexts/posts';
 
 const App = () => {
   return (
     <>
-      <StatusBar barStyle={'dark-content'} backgroundColor={colors.primary} />
-      <Routes />
+      <PostsProvider>
+        <StatusBar />
+        <Routes />
+      </PostsProvider>
     </>
   );
 };

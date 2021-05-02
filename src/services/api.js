@@ -5,3 +5,5 @@ const api = axios.create({
 });
 
 export default api;
+
+//fazer uma função que pega os dados das apis, junta e retorna o necessário, um arquivo apiHooks com esta função
