@@ -1,5 +1,6 @@
-import {FlatList} from 'react-native';
 import styled from 'styled-components';
+import {FlatList} from 'react-native';
+import IconFA from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
 
 export const Container = styled.View`

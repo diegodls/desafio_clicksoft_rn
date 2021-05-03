@@ -1,15 +1,16 @@
-import React, {useState, createContext} from 'react';
+import React, {useState, createContext, useContext} from 'react';
 
-import {loadApiPosts} from '../services/post';
+import {loadApiPosts, deleteApiPost} from '../services/post';
 import {loadApiUsers} from '../services/user';
 
-const PostsContext = createContext({});
+export const PostsContext = createContext({});
 
 export const PostsProvider = ({children}) => {
   const [mergedData, setMergedData] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
   const [apiError, setApiError] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState('');
+  const [idToDelete, setIdToDelete] = useState(null);
 
   async function loadAndMergePosts() {
     const postResponse = await loadApiPosts();
@@ -31,14 +32,30 @@ export const PostsProvider = ({children}) => {
       setLoadingData(false);
       setApiError(false);
     } else {
-      setApiError(false);
-      setApiErrorMessage('Erro ao carregar dados da API!');
+      setApiError(true);
+      setApiErrorMessage(
+        `Erro ao carregar ${!postResponse ? 'Mensagens' : ''}${
+          !postResponse && !userResponse ? 'e' : ''
+        }${!userResponse ? 'Usuários' : ''} da API!`,
+      );
+      setLoadingData(false);
     }
   }
 
-  function deletePost(id) {
-    let arrTemp = mergedData.filter(item => item.id !== id);
-    setMergedData(arrTemp);
+  async function deletePost() {
+    if (idToDelete) {
+      let arrTemp = mergedData.filter(item => item.id !== idToDelete);
+      const deleteResponse = await deleteApiPost(idToDelete);
+      if (deleteResponse.status === 200) {
+        setMergedData(arrTemp);
+        setIdToDelete(null);
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   return (
@@ -50,10 +67,16 @@ export const PostsProvider = ({children}) => {
         apiErrorMessage,
         loadAndMergePosts,
         deletePost,
+        setIdToDelete,
       }}>
       {children}
     </PostsContext.Provider>
   );
 };
+
+export function usePosts() {
+  const context = useContext(PostsContext);
+  return context;
+}
 
 export default PostsContext;

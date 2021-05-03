@@ -1,7 +1,7 @@
 export default {
   primary: '#f0f0f0',
   secondary: '#fcfcfc',
-  border: '#f7f7f7',
+  border: '#222429',
   white: '#FFFFFF',
   black: '#000000',
   text: '#222429',
@@ -11,4 +11,5 @@ export default {
   positive: '#00ffa2',
   pink: '#ff00a5',
   purple: '#ab1cfb',
+  dark_opacity: 'rgba(0,0,0,0.5)',
 };

@@ -1,9 +1,16 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
+import {usePosts} from '../../../contexts/posts';
+
+import {useApp} from '../../../contexts/app';
+
+import {IconDelete} from '../../../components/StyledIcons';
+
 import {
   CardContainer,
-  TitleContainer,
+  HeaderContainer,
+  AuthorContainer,
   Avatar,
   TWF,
   Text,
@@ -20,24 +27,22 @@ const CardList = props => {
   }
 
   function handleNavigateMessage() {
-    navigate('CompletePost', {routePost: props});
-  }
-
-  function handleDeleteMessage() {
-    props.deletePost(props.id);
+    navigate('Message', {routePost: props});
   }
 
   return (
     <>
       <CardContainer>
-        <TWF onPress={handleNavigateAuthor}>
-          <TitleContainer>
-            <Avatar
-              source={require('../../../assets/img/blank-profile_64.png')}
-            />
-            <Text author>{props.author}</Text>
-          </TitleContainer>
-        </TWF>
+        <HeaderContainer>
+          <TWF onPress={handleNavigateAuthor}>
+            <AuthorContainer>
+              <Avatar
+                source={require('../../../assets/img/blank-profile_64.png')}
+              />
+              <Text author>{props.author}</Text>
+            </AuthorContainer>
+          </TWF>
+        </HeaderContainer>
         <TWF onPress={handleNavigateMessage}>
           <MessageContainer>
             <Text messageTitle>

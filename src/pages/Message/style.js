@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import IconFA from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
 
 export const Container = styled.View`
@@ -22,7 +21,10 @@ export const ScrollContainer = styled.ScrollView.attrs(() => ({
 
 export const InfoContainer = styled.View`
   width: 90%;
-  background-color: ${colors.positive};
+  padding: 10px;
+  background-color: ${colors.secondary};
+  margin-bottom: 10px;
+  border-radius: 10px;
 `;
 
 export const InfoItem = styled.View`
@@ -30,18 +32,10 @@ export const InfoItem = styled.View`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  background-color: ${colors.negative};
+  background-color: ${colors.secondary};
 `;
 
 export const TWF = styled.TouchableWithoutFeedback``;
-
-export const IconBack = styled(IconFA)`
-  padding: 20px;
-  position: absolute;
-  z-index: 999;
-  left: 0;
-  top: 0;
-`;
 
 export const Avatar = styled.Image`
   justify-content: center;
@@ -52,7 +46,7 @@ export const Avatar = styled.Image`
   border-radius: 75px;
   border-width: 2px;
   border-color: ${colors.secondary};
-  background-color: ${colors.negative};
+  background-color: ${colors.secondary};
   overflow: hidden;
 `;
 

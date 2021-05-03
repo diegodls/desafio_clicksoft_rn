@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import colors from '../../../styles/colors';
 
-import {} from 'react-native';
-
 export const CardContainer = styled.View`
   width: 100%;
   padding: 10px;
@@ -12,7 +10,14 @@ export const CardContainer = styled.View`
   border-radius: 10px;
 `;
 
-export const TitleContainer = styled.View`
+export const HeaderContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const AuthorContainer = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,6 +38,13 @@ export const Avatar = styled.Image`
 `;
 
 export const MessageContainer = styled.View``;
+
+export const DeleteIcon = styled(IconFA).attrs({
+  name: 'trash-o',
+})`
+  font-size: 50px;
+  color: ${colors.negative};
+`;
 
 export const Text = styled.Text`
   ${({author, messageTitle, messageBody, readMore}) => {

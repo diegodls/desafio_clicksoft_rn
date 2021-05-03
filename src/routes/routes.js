@@ -6,7 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import List from '../pages/List';
 import User from '../pages/User';
 import AddComment from '../pages/AddComment';
-import CompletePost from '../pages/CompletePost';
+import Message from '../pages/Message';
 
 const Stack = createStackNavigator();
 
@@ -39,10 +39,10 @@ export default function Routes() {
           }}
         />
         <Stack.Screen
-          name="CompletePost"
-          component={CompletePost}
+          name="Message"
+          component={Message}
           options={{
-            title: 'Post Completo',
+            title: 'Mensagem Completa',
           }}
         />
       </Stack.Navigator>

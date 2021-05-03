@@ -1,9 +1,6 @@
-import React, {useEffect, useContext} from 'react';
-
-import PostContext from '../../contexts/posts';
-
+import React, {useEffect} from 'react';
+import {usePosts} from '../../contexts/posts';
 import {Container, PageTitle, PostsList} from './styles';
-
 import CardList from './CardList';
 
 const Home = () => {
@@ -13,17 +10,10 @@ const Home = () => {
     apiError,
     apiErrorMessage,
     loadAndMergePosts,
-  } = useContext(PostContext);
+  } = usePosts();
 
   useEffect(() => {
-    console.log('useEffect');
-    console.log(
-      `List - mergedData = ${mergedData ? mergedData.length : mergedData}`,
-    );
-
     loadAndMergePosts();
-
-    // desabilitado devido a não necessitar de dependências
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
