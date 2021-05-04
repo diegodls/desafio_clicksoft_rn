@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {useApp} from '../../contexts/app';
-import {usePosts} from '../../contexts/posts';
+import {useApi} from '../../contexts/api';
 
 import {IconClose} from '../../components/StyledIcons';
 
@@ -21,7 +21,7 @@ import {
 
 const StyledModal = props => {
   const {modalState, closeModal, openModalError} = useApp();
-  const {deletePost} = usePosts();
+  const {deletePost} = useApi();
 
   async function handleDelete() {
     const status = await deletePost();

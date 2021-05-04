@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
+import sizes from '../../styles/sizes';
 
 export const Container = styled.View`
   flex: 1;
@@ -17,26 +18,25 @@ export const ScrollContainer = styled.ScrollView.attrs(() => ({
   flex: 1;
   width: 100%;
   background-color: ${colors.primary};
-  padding-top: 10px;
+  padding-top: ${sizes.paddingSmall}px;
 `;
 
 export const InfoContainer = styled.View`
   width: 90%;
-  background-color: ${colors.positive};
 `;
 
 export const InfoItem = styled.View`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
-  background-color: ${colors.negative};
+  margin-bottom: ${sizes.marginRegular}px;
+
 `;
 
 export const TWF = styled.TouchableWithoutFeedback``;
 
 export const IconBack = styled(IconFA)`
-  padding: 20px;
+  padding: ${sizes.paddingRegular}px;
   position: absolute;
   z-index: 999;
   left: 0;
@@ -46,13 +46,13 @@ export const IconBack = styled(IconFA)`
 export const Avatar = styled.Image`
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: ${sizes.marginRegular}px;
   width: 150px;
   height: 150px;
   border-radius: 75px;
   border-width: 2px;
   border-color: ${colors.secondary};
-  background-color: ${colors.negative};
+  background-color: ${colors.secondary};
   overflow: hidden;
 `;
 
@@ -61,28 +61,28 @@ export const Text = styled.Text`
     switch (true) {
       case name:
         return `
-            font-size: 25px;
+            font-size: ${sizes.fontMedium}px;
             font-family: 'MavenPro-Black';
             color: ${colors.text};
-            margin-bottom: 20px;
+            margin-bottom: ${sizes.marginRegular}px;
             `;
       case category:
         return `
-            font-size: 20px;
+            font-size: ${sizes.fontRegular}px;
             font-family: 'MavenPro-Black';
             color: ${colors.subText};
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: ${sizes.marginRegular}px;
+            margin-bottom: ${sizes.marginRegular}px;
             `;
       case item:
         return `
-            font-size: 14px;
+            font-size: ${sizes.fontRegular - 5}px;
             font-family: 'MavenPro-Regular';
             color: ${colors.text};
             `;
       case subItem:
         return `
-            font-size: 18px;
+            font-size: ${sizes.fontRegular}px;
             font-family: 'MavenPro-SemiBold';
             color: ${colors.subText};
             `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from './src/routes/routes';
 import {StatusBar} from './src/components/StatusBar';
-import {PostsProvider} from './src/contexts/posts';
+import {PostsProvider} from './src/contexts/api';
 import {AppProvider} from './src/contexts/app';
 
 const App = () => {

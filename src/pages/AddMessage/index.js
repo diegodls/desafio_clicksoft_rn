@@ -8,14 +8,14 @@ import StyledSaveModal from '../../components/StyledSaveModal';
 import StyledErrorModal from '../../components/StyledErrorModal';
 import {IconBack} from '../../components/StyledIcons';
 
-import {usePosts} from '../../contexts/posts';
+import {useApi} from '../../contexts/api';
 import {useApp} from '../../contexts/app';
 
 const AddMessage = () => {
   const navigation = useNavigation();
 
   const {openModalSave, openModalError} = useApp();
-  const {setPostToSave} = usePosts();
+  const {setPostToSave} = useApi();
 
   const [title, setTitle] = useState(null);
   const [message, setMessage] = useState(null);

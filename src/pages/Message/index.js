@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import {usePosts} from '../../contexts/posts';
+import {useApi} from '../../contexts/api';
 import {useApp} from '../../contexts/app';
 
-import {IconBack, IconDelete} from '../../components/StyledIcons';
+import {IconBack} from '../../components/StyledIcons';
 
 import {NegativeButton} from '../../components/StyledButton';
 import StyledDeleteModal from '../../components/StyledDeleteModal';
@@ -25,7 +25,7 @@ const Message = ({route}) => {
   const {routePost} = route.params;
 
   const {openModalDelete} = useApp();
-  const {setIdToDelete} = usePosts();
+  const {setIdToDelete} = useApi();
 
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
@@ -66,9 +66,9 @@ const Message = ({route}) => {
               />
               <Text name>{post.author}</Text>
               <InfoContainer>
-                <Text category>{post.title}</Text>
+                <Text title>{post.title}</Text>
                 <InfoItem>
-                  <Text subItem>{post.body}</Text>
+                  <Text message>{post.body}</Text>
                 </InfoItem>
               </InfoContainer>
               <NegativeButton title={'Apagar'} action={handleDeleteMessage} />

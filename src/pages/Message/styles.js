@@ -22,17 +22,17 @@ export const ScrollContainer = styled.ScrollView.attrs(() => ({
 
 export const InfoContainer = styled.View`
   width: 90%;
-  padding: 10px;
+  padding: ${sizes.paddingSmall}px;
   background-color: ${colors.secondary};
-  margin-bottom: 10px;
-  border-radius: 10px;
+  margin-bottom: ${sizes.marginSmall}px;
+  border-radius: ${sizes.marginSmall}px;
 `;
 
 export const InfoItem = styled.View`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: ${sizes.marginRegular}px;
   background-color: ${colors.secondary};
 `;
 
@@ -41,7 +41,7 @@ export const TWF = styled.TouchableWithoutFeedback``;
 export const Avatar = styled.Image`
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: ${sizes.marginSmall}px;
   width: 150px;
   height: 150px;
   border-radius: 75px;
@@ -52,32 +52,26 @@ export const Avatar = styled.Image`
 `;
 
 export const Text = styled.Text`
-  ${({name, category, item, subItem}) => {
+  ${({name, title, message}) => {
     switch (true) {
       case name:
         return `
-            font-size: 25px;
+            font-size: ${sizes.fontMedium}px;
             font-family: 'MavenPro-Black';
             color: ${colors.text};
-            margin-bottom: 20px;
+            margin-bottom: ${sizes.marginSmall}px;
             `;
-      case category:
+      case title:
         return `
-            font-size: 20px;
+            font-size: ${sizes.fontRegular}px;
             font-family: 'MavenPro-Black';
             color: ${colors.subText};
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: ${sizes.marginSmall}px;
+            margin-bottom: ${sizes.marginSmall}px;
             `;
-      case item:
+      case message:
         return `
-            font-size: 14px;
-            font-family: 'MavenPro-Regular';
-            color: ${colors.text};
-            `;
-      case subItem:
-        return `
-            font-size: 18px;
+            font-size: ${sizes.fontRegular}px;
             font-family: 'MavenPro-SemiBold';
             color: ${colors.subText};
             `;

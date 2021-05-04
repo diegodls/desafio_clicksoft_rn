@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import IconFA from 'react-native-vector-icons/FontAwesome';
 import colors from '../../../styles/colors';
+import sizes from '../../../styles/sizes';
 
 export const CardContainer = styled.View`
   width: 100%;
-  padding: 10px;
+  padding: ${sizes.paddingSmall}px;
   background-color: ${colors.secondary};
-  margin-bottom: 10px;
-  border-radius: 10px;
+  margin-bottom: ${sizes.marginSmall}px;
+  border-radius: ${sizes.marginSmall}px;
 `;
 
 export const HeaderContainer = styled.View`

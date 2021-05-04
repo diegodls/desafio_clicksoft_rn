@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {usePosts} from '../../contexts/posts';
+import {useApi} from '../../contexts/api';
 import {Container, TopContainer, TWF, Text, PostsList} from './styles';
 import {IconAdd} from '../../components/StyledIcons';
 import LoadingAnimation from '../../components/LoadingAnimation';
@@ -15,7 +15,7 @@ const Home = () => {
     apiError,
     apiErrorMessage,
     loadAndMergePosts,
-  } = usePosts();
+  } = useApi();
 
   function handleAddMessage() {
     navigate('AddMessage');
@@ -44,13 +44,13 @@ const Home = () => {
         <PostsList
           data={mergedData}
           keyExtractor={item => String(item.id)}
+          renderItem={({item}) => <CardList {...item} />}
           initialNumToRender={10}
           windowSize={5}
           maxToRenderPerBatch={5}
           updateCellsBatchingPeriod={30}
           removeClippedSubviews={false}
           onEndReachedThreshold={0.1}
-          renderItem={({item}) => <CardList {...item} />}
         />
       )}
     </Container>

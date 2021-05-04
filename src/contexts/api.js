@@ -1,13 +1,14 @@
 import React, {useState, createContext, useContext} from 'react';
 
 import {loadApiPosts, deleteApiPost, saveApiPost} from '../services/post';
-import {loadApiUsers} from '../services/user';
+import {loadApiUser, loadApiUsers} from '../services/user';
 
-export const PostsContext = createContext({});
+export const ApiContext = createContext({});
 
 export const PostsProvider = ({children}) => {
   const [apiPosts, setApiPosts] = useState([]);
   const [apiUsers, setApiUsers] = useState([]);
+  const [apiUserLoaded, setApiUserLoaded] = useState(null);
   const [mergedData, setMergedData] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
   const [apiError, setApiError] = useState(false);
@@ -94,8 +95,23 @@ export const PostsProvider = ({children}) => {
     }
   }
 
+  async function loadUserApi(id) {
+    setLoadingData(true);
+    const userResponse = await loadApiUser(id);
+    if (userResponse) {
+      setApiError(false);
+      setLoadingData(false);
+      return userResponse.data;
+    } else {
+      setApiErrorMessage('Erro ao carregar usuários da API!');
+      setApiError(true);
+      setLoadingData(false);
+      return;
+    }
+  }
+
   return (
-    <PostsContext.Provider
+    <ApiContext.Provider
       value={{
         mergedData,
         loadingData,
@@ -106,15 +122,16 @@ export const PostsProvider = ({children}) => {
         setIdToDelete,
         savePost,
         setPostToSave,
+        loadUserApi,
       }}>
       {children}
-    </PostsContext.Provider>
+    </ApiContext.Provider>
   );
 };
 
-export function usePosts() {
-  const context = useContext(PostsContext);
+export function useApi() {
+  const context = useContext(ApiContext);
   return context;
 }
 
-export default PostsContext;
+export default ApiContext;

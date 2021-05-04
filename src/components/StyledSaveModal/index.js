@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {useApp} from '../../contexts/app';
-import {usePosts} from '../../contexts/posts';
+import {useApi} from '../../contexts/api';
 
 import {IconClose} from '../StyledIcons';
 
@@ -27,7 +27,7 @@ const StyledModal = props => {
     closeModal,
     openModalError,
   } = useApp();
-  const {savePost} = usePosts();
+  const {savePost} = useApi();
 
   async function handleSave() {
     const status = await savePost();

@@ -42,7 +42,8 @@ const CardList = props => {
               {props.title.substring(0, titleLength)}
               {props.title.length > titleLength ? '...' : ''}
             </Text>
-            <Text messageBody>{props.body}</Text>
+            <Text messageBody>{props.body} </Text>
+            <Text readMore>Leia Mais </Text>
           </MessageContainer>
         </TWF>
       </CardContainer>
