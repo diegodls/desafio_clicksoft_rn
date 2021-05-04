@@ -1,12 +1,5 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-
-import {usePosts} from '../../../contexts/posts';
-
-import {useApp} from '../../../contexts/app';
-
-import {IconDelete} from '../../../components/StyledIcons';
-
 import {
   CardContainer,
   HeaderContainer,

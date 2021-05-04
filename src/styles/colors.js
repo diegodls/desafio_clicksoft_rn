@@ -8,7 +8,7 @@ export default {
   subText: '#323232',
   blue: '#006aff',
   negative: '#ff4f00',
-  positive: '#00ffa2',
+  positive: '#5ab35d',
   pink: '#ff00a5',
   purple: '#ab1cfb',
   dark_opacity: 'rgba(0,0,0,0.5)',

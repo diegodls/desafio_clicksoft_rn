@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import colors from '../../styles/colors';
+import sizes from '../../styles/sizes';
 
 export const Container = styled.View`
   flex: 1;
@@ -16,7 +17,7 @@ export const ScrollContainer = styled.ScrollView.attrs(() => ({
   flex: 1;
   width: 100%;
   background-color: ${colors.primary};
-  padding-top: 10px;
+  padding-top: ${sizes.paddingSmall}px;
 `;
 
 export const InfoContainer = styled.View`

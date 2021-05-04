@@ -3,9 +3,9 @@ import React from 'react';
 import {useApp} from '../../contexts/app';
 import {usePosts} from '../../contexts/posts';
 
-import {IconClose} from '../../components/StyledIcons';
+import {IconClose} from '../StyledIcons';
 
-import {NormalButton, NegativeButton} from '../../components/StyledButton';
+import {NormalButton, PositiveButton} from '../StyledButton';
 
 import {
   Modal,
@@ -21,10 +21,10 @@ import {
 
 const StyledModal = props => {
   const {modalState, closeModal, openModalError} = useApp();
-  const {deletePost} = usePosts();
+  const {savePost} = usePosts();
 
-  async function handleDelete() {
-    const status = await deletePost();
+  async function handleSave() {
+    const status = await savePost();
 
     if (status) {
       handleCloseModal();
@@ -42,7 +42,7 @@ const StyledModal = props => {
   return (
     <>
       <Modal
-        visible={modalState === 'delete'}
+        visible={modalState === 'save'}
         animationType={'fade'}
         transparent={true}>
         <ModalBackground>
@@ -51,13 +51,13 @@ const StyledModal = props => {
           </TWF>
           <ModalContainer>
             <ModalTitleContainer>
-              <Text titleModal>Deseja excluir?</Text>
+              <Text titleModal>Deseja Salvar?</Text>
               <TWF onPress={handleCloseModal}>
                 <IconClose />
               </TWF>
             </ModalTitleContainer>
             <ModalMessageContainer>
-              <Text messageModal>Esta ação não pode ser desfeita!</Text>
+              <Text messageModal>Deseja salvar esta mensagem?</Text>
             </ModalMessageContainer>
             <ModalButtonContainer>
               <NormalButton
@@ -65,10 +65,10 @@ const StyledModal = props => {
                 title={'Voltar'}
                 action={handleCloseModal}
               />
-              <NegativeButton
+              <PositiveButton
                 type={'normal'}
-                title={'Excluir'}
-                action={handleDelete}
+                title={'Salvar'}
+                action={handleSave}
               />
             </ModalButtonContainer>
           </ModalContainer>

@@ -17,12 +17,14 @@ import {
   Text,
   TWF,
   Avatar,
-} from './style';
+} from './styles';
 
 const Message = ({route}) => {
   const navigation = useNavigation();
   const {routePost} = route.params;
+  
   const {openModalDelete} = useApp();
+  const {setIdToDelete} = usePosts();
 
   const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
@@ -33,22 +35,12 @@ const Message = ({route}) => {
   }
 
   function handleDeleteMessage() {
-    openModalDelete(routePost.id);
-
-    // console.log(typeof deleteStatus);
-    // const deleteStatus = deletePost(routePost.id); //delete do UsePost
-    // if (deleteStatus) {
-    //   setTimeout(() => {
-    //     handleBack();
-    //   }, 1000);
-    // } else {
-    //   console.log('erro ao deletar - colocar um toast aqui');
-    // }
+    setIdToDelete(routePost.id);
+    openModalDelete();
   }
 
   useEffect(() => {
     setLoading(true);
-
     if (routePost) {
       setPost(routePost);
       setLoading(false);

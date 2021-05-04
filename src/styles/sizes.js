@@ -1,13 +1,15 @@
 export default {
   small: 25,
   medium: 35,
+  large: 40,
   fontSmall: 10,
   fontRegular: 20,
-  fontMedium: 20,
-  fontLarge: 20,
+  fontMedium: 25,
+  fontLarge: 40,
   borderRadiusRegular: 10,
   marginSmall: 10,
   marginRegular: 20,
+  paddingVerySmall: 2,
   paddingSmall: 10,
   paddingRegular: 20,
 };

@@ -39,13 +39,6 @@ export const Avatar = styled.Image`
 
 export const MessageContainer = styled.View``;
 
-export const DeleteIcon = styled(IconFA).attrs({
-  name: 'trash-o',
-})`
-  font-size: 50px;
-  color: ${colors.negative};
-`;
-
 export const Text = styled.Text`
   ${({author, messageTitle, messageBody, readMore}) => {
     switch (true) {

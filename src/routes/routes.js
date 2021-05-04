@@ -3,9 +3,9 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import List from '../pages/List';
+import Home from '../pages/Home';
 import User from '../pages/User';
-import AddComment from '../pages/AddComment';
+import AddMessage from '../pages/AddMessage';
 import Message from '../pages/Message';
 
 const Stack = createStackNavigator();
@@ -18,10 +18,10 @@ export default function Routes() {
           headerShown: false,
         }}>
         <Stack.Screen
-          name="List"
-          component={List}
+          name="Home"
+          component={Home}
           options={{
-            title: 'Lista',
+            title: 'Home',
           }}
         />
         <Stack.Screen
@@ -32,10 +32,10 @@ export default function Routes() {
           }}
         />
         <Stack.Screen
-          name="AddComment"
-          component={AddComment}
+          name="AddMessage"
+          component={AddMessage}
           options={{
-            title: 'Adicionar Comentário',
+            title: 'Adicionar Mensagem',
           }}
         />
         <Stack.Screen

@@ -1,6 +1,6 @@
 import React, {useState, createContext, useContext} from 'react';
 
-import {loadApiPosts, deleteApiPost} from '../services/post';
+import {loadApiPosts, deleteApiPost, saveApiPost} from '../services/post';
 import {loadApiUsers} from '../services/user';
 
 export const PostsContext = createContext({});
@@ -11,6 +11,7 @@ export const PostsProvider = ({children}) => {
   const [apiError, setApiError] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState('');
   const [idToDelete, setIdToDelete] = useState(null);
+  const [postToSave, setPostToSave] = useState(null);
 
   async function loadAndMergePosts() {
     const postResponse = await loadApiPosts();
@@ -58,6 +59,21 @@ export const PostsProvider = ({children}) => {
     }
   }
 
+  async function savePost() {
+    if (postToSave) {
+      const saveResponse = await saveApiPost(postToSave);
+      if (saveResponse.status === 200) {
+        //Adicionar o post salvo no mergedData
+        setPostToSave(null);
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   return (
     <PostsContext.Provider
       value={{
@@ -68,6 +84,8 @@ export const PostsProvider = ({children}) => {
         loadAndMergePosts,
         deletePost,
         setIdToDelete,
+        savePost,
+        setPostToSave,
       }}>
       {children}
     </PostsContext.Provider>

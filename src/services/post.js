@@ -34,7 +34,26 @@ export async function deleteApiPost(id) {
       method: 'DELETE',
     })
     .then(res => {
+      return res;
+    })
+    .catch(() => {
+      return null;
+    });
+  return response;
+}
+
+export async function saveApiPost(post) {
+  const response = await api
+    .delete('/posts', {
+      method: 'POST',
+      body: JSON.stringify(post),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then(res => {
       console.log(typeof res.status);
+      console.log(typeof res.data);
       return res;
     })
     .catch(() => {

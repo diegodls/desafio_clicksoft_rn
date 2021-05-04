@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {usePosts} from '../../contexts/posts';
-import {Container, PageTitle, PostsList} from './styles';
+import {Container, TopContainer, TWF, Text, PostsList} from './styles';
+import {IconAdd} from '../../components/StyledIcons';
 import CardList from './CardList';
-
 const Home = () => {
+  const {navigate} = useNavigation();
+
   const {
     mergedData,
     loadingData,
@@ -12,6 +15,10 @@ const Home = () => {
     loadAndMergePosts,
   } = usePosts();
 
+  function handleAddMessage() {
+    navigate('AddMessage');
+  }
+
   useEffect(() => {
     loadAndMergePosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -19,11 +26,16 @@ const Home = () => {
 
   return (
     <Container>
-      <PageTitle>Mensagens</PageTitle>
+      <TopContainer>
+        <Text>Mensagens</Text>
+        <TWF onPress={handleAddMessage}>
+          <IconAdd large />
+        </TWF>
+      </TopContainer>
       {loadingData ? (
-        <PageTitle>Carregando...</PageTitle>
+        <Text>Carregando...</Text>
       ) : apiError ? (
-        <PageTitle>{apiErrorMessage}</PageTitle>
+        <Text>{apiErrorMessage}</Text>
       ) : (
         <PostsList
           data={mergedData}

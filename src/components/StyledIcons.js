@@ -21,17 +21,20 @@ export const IconDelete = styled(IconFA).attrs({
 `;
 
 export const IconAdd = styled(IconFA).attrs({
-  name: 'trash-o',
+  name: 'plus-circle',
 })`
   font-size: ${sizes.medium}px;
-  color: ${colors.negative};
+  color: ${colors.text};
 
-  ${({medium}) => {
+  ${({medium, large}) => {
     switch (true) {
       case medium:
         return `
-        font-size: ${sizes.medium}px;
-        color: ${colors.negative};
+        font-size: ${sizes.medium}px;        
+            `;
+      case large:
+        return `
+        font-size: ${sizes.large}px;        
             `;
     }
   }}
@@ -42,7 +45,7 @@ export const IconBack = styled(IconFA).attrs({
 })`
   font-size: ${sizes.small}px;
   color: ${colors.text};
-  padding: 20px;
+  padding: ${sizes.paddingRegular}px;
   position: absolute;
   z-index: 999;
   left: 0;
