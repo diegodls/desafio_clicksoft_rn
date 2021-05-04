@@ -6,6 +6,7 @@ import {useApp} from '../../contexts/app';
 
 import {IconBack, IconDelete} from '../../components/StyledIcons';
 
+import {NegativeButton} from '../../components/StyledButton';
 import StyledDeleteModal from '../../components/StyledDeleteModal';
 import StyledErrorModal from '../../components/StyledErrorModal';
 
@@ -22,7 +23,7 @@ import {
 const Message = ({route}) => {
   const navigation = useNavigation();
   const {routePost} = route.params;
-  
+
   const {openModalDelete} = useApp();
   const {setIdToDelete} = usePosts();
 
@@ -70,9 +71,7 @@ const Message = ({route}) => {
                   <Text subItem>{post.body}</Text>
                 </InfoItem>
               </InfoContainer>
-              <TWF onPress={handleDeleteMessage}>
-                <IconDelete small />
-              </TWF>
+              <NegativeButton title={'Apagar'} action={handleDeleteMessage} />
             </ScrollContainer>
           </>
         )}

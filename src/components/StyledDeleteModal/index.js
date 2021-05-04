@@ -31,7 +31,7 @@ const StyledModal = props => {
       props.navigation.goBack();
     } else {
       handleCloseModal();
-      openModalError();
+      openModalError('Erro!', 'Erro ao apagar. Tente novamente mais tarde');
     }
   }
 

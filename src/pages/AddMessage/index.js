@@ -14,7 +14,7 @@ import {useApp} from '../../contexts/app';
 const AddMessage = () => {
   const navigation = useNavigation();
 
-  const {openModalSave} = useApp();
+  const {openModalSave, openModalError} = useApp();
   const {setPostToSave} = usePosts();
 
   const [title, setTitle] = useState(null);
@@ -24,14 +24,22 @@ const AddMessage = () => {
     navigation.goBack();
   }
 
+  function clearInputs() {
+    setTitle(null);
+    setMessage(null);
+  }
+
   function handleSave() {
-    if (!title || !message) {
+    if (title && message) {
       setPostToSave({
-        userId: Math.floor(Math.random() * (10 - 1 + 1)),
+        userId: Math.floor(Math.random() * 10) + 1, //aleatório devido a falta de login, cujo não foi requisitado
+        id: Math.floor(Math.random() * 1000) + 100, //aleatório devido a api retornar sem id: 101 terminado em erro na lista
         body: message,
         title: title,
       });
       openModalSave();
+    } else {
+      openModalError('Erro!', 'Preencha os campos vazios!');
     }
   }
 
@@ -46,7 +54,7 @@ const AddMessage = () => {
           title
           value={title}
           onChangeText={setTitle}
-          placeholder="Digite o seu nome"
+          placeholder="Digite o titulo"
           autoCorrect={false}
           autoCapitalize={'words'}
         />
@@ -59,10 +67,8 @@ const AddMessage = () => {
           autoCapitalize={'sentences'}
           multiline={true}
         />
-        <TWF onPress={handleSave}>
-          <PositiveButton title={'Salvar'} />
-        </TWF>
-        <StyledSaveModal navigation={navigation} />
+        <PositiveButton title={'Salvar'} action={handleSave} />
+        <StyledSaveModal navigation={navigation} clearInput={clearInputs} />
         <StyledErrorModal />
       </Container>
     </>

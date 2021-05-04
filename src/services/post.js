@@ -44,16 +44,14 @@ export async function deleteApiPost(id) {
 
 export async function saveApiPost(post) {
   const response = await api
-    .delete('/posts', {
+    .post('/posts', {
       method: 'POST',
-      body: JSON.stringify(post),
+      body: JSON.stringify({...post}),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
     .then(res => {
-      console.log(typeof res.status);
-      console.log(typeof res.data);
       return res;
     })
     .catch(() => {

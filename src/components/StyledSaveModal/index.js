@@ -20,7 +20,13 @@ import {
 } from './styles';
 
 const StyledModal = props => {
-  const {modalState, closeModal, openModalError} = useApp();
+  const {
+    modalState,
+    modalTitle,
+    modalMessage,
+    closeModal,
+    openModalError,
+  } = useApp();
   const {savePost} = usePosts();
 
   async function handleSave() {
@@ -28,10 +34,14 @@ const StyledModal = props => {
 
     if (status) {
       handleCloseModal();
-      props.navigation.goBack();
+      openModalError('Sucesso!', 'Sua mensagem foi salva');
+      props.clearInput();
     } else {
       handleCloseModal();
-      openModalError();
+      openModalError(
+        'Erro!',
+        'Erro ao salvar sua mensagem! Tente novamente mais tarde',
+      );
     }
   }
 

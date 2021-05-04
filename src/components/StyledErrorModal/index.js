@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 const StyledErrorModal = props => {
-  const {modalState, closeModal} = useApp();
+  const {modalState, modalErrorTitle, modalErrorMessage, closeModal} = useApp();
 
   function handleCloseModal() {
     closeModal();
@@ -37,13 +37,13 @@ const StyledErrorModal = props => {
           </TWF>
           <ModalContainer>
             <ModalTitleContainer>
-              <Text titleModal>Atenção!</Text>
+              <Text titleModal>{modalErrorTitle}</Text>
               <TWF onPress={handleCloseModal}>
                 <IconClose />
               </TWF>
             </ModalTitleContainer>
             <ModalMessageContainer>
-              <Text messageModal>Erro ao executar esta ação!</Text>
+              <Text messageModal>{modalErrorMessage}</Text>
             </ModalMessageContainer>
             <ModalButtonContainer>
               <NormalButton

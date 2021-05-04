@@ -3,6 +3,8 @@ import {useNavigation} from '@react-navigation/native';
 import {usePosts} from '../../contexts/posts';
 import {Container, TopContainer, TWF, Text, PostsList} from './styles';
 import {IconAdd} from '../../components/StyledIcons';
+import LoadingAnimation from '../../components/LoadingAnimation';
+import ErrorAnimation from '../../components/ErrorAnimation';
 import CardList from './CardList';
 const Home = () => {
   const {navigate} = useNavigation();
@@ -28,18 +30,26 @@ const Home = () => {
     <Container>
       <TopContainer>
         <Text>Mensagens</Text>
-        <TWF onPress={handleAddMessage}>
-          <IconAdd large />
-        </TWF>
+        {!loadingData && !apiError ? (
+          <TWF onPress={handleAddMessage}>
+            <IconAdd large />
+          </TWF>
+        ) : null}
       </TopContainer>
       {loadingData ? (
-        <Text>Carregando...</Text>
+        <LoadingAnimation message={'Carregando mensagens'} />
       ) : apiError ? (
-        <Text>{apiErrorMessage}</Text>
+        <ErrorAnimation message={apiErrorMessage} />
       ) : (
         <PostsList
           data={mergedData}
           keyExtractor={item => String(item.id)}
+          initialNumToRender={10}
+          windowSize={5}
+          maxToRenderPerBatch={5}
+          updateCellsBatchingPeriod={30}
+          removeClippedSubviews={false}
+          onEndReachedThreshold={0.1}
           renderItem={({item}) => <CardList {...item} />}
         />
       )}

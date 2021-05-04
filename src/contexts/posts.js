@@ -6,6 +6,8 @@ import {loadApiUsers} from '../services/user';
 export const PostsContext = createContext({});
 
 export const PostsProvider = ({children}) => {
+  const [apiPosts, setApiPosts] = useState([]);
+  const [apiUsers, setApiUsers] = useState([]);
   const [mergedData, setMergedData] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
   const [apiError, setApiError] = useState(false);
@@ -13,25 +15,40 @@ export const PostsProvider = ({children}) => {
   const [idToDelete, setIdToDelete] = useState(null);
   const [postToSave, setPostToSave] = useState(null);
 
-  async function loadAndMergePosts() {
-    const postResponse = await loadApiPosts();
-    const userResponse = await loadApiUsers();
-
-    if (postResponse && userResponse) {
+  async function mergePosts(arrPost, arrUsers) {
+    if (arrPost && arrUsers) {
       setLoadingData(true);
       let arrTemp = [];
 
-      postResponse.data.forEach(post => {
-        userResponse.data.forEach(user => {
+      arrPost.forEach(post => {
+        arrUsers.forEach(user => {
           if (post.userId === user.id) {
             arrTemp.push({...post, author: user.name});
           }
         });
       });
 
-      setMergedData(arrTemp);
+      setLoadingData(false);
+      return arrTemp;
+    } else {
+      return null;
+    }
+  }
+
+  async function loadAndMergePosts() {
+    const postResponse = await loadApiPosts();
+    const userResponse = await loadApiUsers();
+
+    let arrMerged = [];
+
+    if (postResponse && userResponse) {
+      setLoadingData(true);
+      arrMerged = await mergePosts(postResponse.data, userResponse.data);
+      setMergedData(arrMerged);
       setLoadingData(false);
       setApiError(false);
+      setApiPosts(postResponse.data);
+      setApiUsers(userResponse.data);
     } else {
       setApiError(true);
       setApiErrorMessage(
@@ -62,8 +79,11 @@ export const PostsProvider = ({children}) => {
   async function savePost() {
     if (postToSave) {
       const saveResponse = await saveApiPost(postToSave);
-      if (saveResponse.status === 200) {
-        //Adicionar o post salvo no mergedData
+
+      let arrTemp = [postToSave].concat(mergedData); //concat para adicionar no inicio, pois a api não "salva" no db
+      let arrMerged = await mergePosts(arrTemp, apiUsers);
+      if (saveResponse.status === 201) {
+        setMergedData(arrMerged);
         setPostToSave(null);
         return true;
       } else {
